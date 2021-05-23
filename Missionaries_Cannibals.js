@@ -38,3 +38,36 @@ const do_operation = (state, operation) =>{
         console.log(error)
     }
 }
+
+//Function to return the state of opposite bank (left)
+const oppositeBank = (currentBank) =>{
+    var oppositeBank = []
+    var value;
+    for (var i=0; i<currentBank.length; i++){
+        value = startState[i]-currentBank[i]
+        oppositeBank[i]=value
+    }
+    return oppositeBank;
+}
+
+//Functions for the Rules
+const isLegal = (state) => {
+    if((state[0]>= 0 && state[0] <=3) && (state[1] >= 0 && state[1] <=3))
+    return true;
+    else
+    return false;
+}
+
+const isBankSafe = (state) => {
+    if(state[1]>state[0] && state[0]!=0)
+    return false;
+    else
+    return true;
+}
+
+const isStateSafe = (state) => {
+    if(isBankSafe(state) && isBankSafe(oppositeBank(state)))
+    return true;
+    else
+    return false;
+}
